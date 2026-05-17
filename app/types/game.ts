@@ -23,16 +23,10 @@ export type GameState = {
   hint: string; //5文字ヒント
   answer: string; //回答
 };
-//初期値
-export const initialState: GameState = {
-  screen: "TITLE",
-
-  players: [],
-
-  currentPlayerIndex: 0,
-  answerPlayerIndex: 1,
-
-  topic: "",
-  hint: "",
-  answer: "",
-};
+export type GameAction =
+  | { type: "GO_PLAYER_SETUP" }
+  | { type: "GO_TOPIC" }
+  | { type: "GO_HINT_INPUT" }
+  | { type: "GO_ANSWER_INPUT" }
+  | { type: "GO_RESULT" }
+  | { type: "GO_TITLE" };
