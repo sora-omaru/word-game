@@ -2,6 +2,7 @@
 
 import { useReducer } from "react";
 import { gameReducer, initialGameState } from "./reducers/gameReducer";
+import { PlayerSetup } from "@/components/PlayerSetup";
 
 export default function Home() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
@@ -23,6 +24,8 @@ export default function Home() {
           <button onClick={() => dispatch({ type: "GO_TOPIC" })}>次へ</button>
         </div>
       )}
+
+      {state.screen === "PLAYER_SETUP" && <PlayerSetup dispatch={dispatch} />}
     </main>
   );
 }
