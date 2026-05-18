@@ -29,4 +29,5 @@ export type GameAction =
   | { type: "GO_HINT_INPUT" }
   | { type: "GO_ANSWER_INPUT" }
   | { type: "GO_RESULT" }
-  | { type: "GO_TITLE" };
+  | { type: "GO_TITLE" }
+  | { type: "SET_PLAYERS"; payload: Player[] };

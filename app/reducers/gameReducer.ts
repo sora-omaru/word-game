@@ -50,6 +50,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...initialGameState,
       };
+    case "SET_PLAYERS":
+      return {
+        ...state,
+        players: action.payload,
+        screen: "TOPIC",
+      };
 
     default:
       return state;
