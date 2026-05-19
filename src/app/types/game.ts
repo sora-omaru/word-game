@@ -23,6 +23,7 @@ export type GameState = {
   hint: string; //5文字ヒント
   answer: string; //回答
 };
+//ゲームの流れ
 export type GameAction =
   | { type: "GO_PLAYER_SETUP" }
   | { type: "GO_TOPIC" }
@@ -30,4 +31,11 @@ export type GameAction =
   | { type: "GO_ANSWER_INPUT" }
   | { type: "GO_RESULT" }
   | { type: "GO_TITLE" }
-  | { type: "SET_PLAYERS"; payload: Player[] };
+  | {
+      type: "START_GAME";
+      payload: {
+        players: Player[];
+        topic: string;
+      };
+    }
+  | { type: "SET_TOPIC"; payload: string };

@@ -50,10 +50,17 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...initialGameState,
       };
-    case "SET_PLAYERS":
+    case "START_GAME":
       return {
         ...state,
-        players: action.payload,
+        players: action.payload.players,
+        topic: action.payload.topic,
+        screen: "TOPIC",
+      };
+    case "SET_TOPIC"://再抽選などを作るのであれば必要かも？
+      return {
+        ...state,
+        topic: action.payload,
         screen: "TOPIC",
       };
 

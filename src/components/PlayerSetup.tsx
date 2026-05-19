@@ -2,7 +2,7 @@
 
 import { GameAction, Player } from "@/app/types/game";
 import { useState } from "react";
-
+import topics from "@/data/topics.json";
 type Props = {
   dispatch: React.Dispatch<GameAction>;
 };
@@ -28,6 +28,7 @@ export function PlayerSetup({ dispatch }: Props) {
   };
 
   const handleChangePlayerName = (index: number, value: string) => {
+    console.log("start")
     const nextPlayerNames = playerNames.map((name, currentIndex) =>
       currentIndex === index ? value : name,
     );
@@ -41,10 +42,16 @@ export function PlayerSetup({ dispatch }: Props) {
       score: 0,
     }));
 
+    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+
     dispatch({
-      type: "SET_PLAYERS",
-      payload: players,
+      type: "START_GAME",
+      payload: {
+        players,
+        topic: randomTopic,
+      },
     });
+    console.log("お題",randomTopic)
   };
 
   return (
