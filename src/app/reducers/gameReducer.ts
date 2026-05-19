@@ -69,13 +69,40 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         hint: action.payload,
         screen: "ANSWER_INPUT",
       };
-      
-      case "SET_ANSWER":
-        return{
-          ...state,
-          answer: action.payload,
-          screen:"RESULT"
-        }
+
+    case "SET_ANSWER":
+      return {
+        ...state,
+        answer: action.payload,
+        screen: "RESULT",
+      };
+
+    case "ANSWER_CORRECT": //正解者に2点、出題者に1点。そのほかのプレイヤーは1点
+      return {
+        ...state,
+        players: state.players.map((player, index) => {
+          if (index === state.answerPlayerIndex) {
+            return {
+              ...player,
+              score: player.score + 2,
+            };
+          }
+
+          if (index === state.currentPlayerIndex) {
+            return {
+              ...player,
+              score: player.score + 1,
+            };
+          }
+
+          return player;
+        }),
+      };
+
+    case "ANSWER_INCORRECT":
+      return {
+        ...state,
+      };
 
     default:
       return state;

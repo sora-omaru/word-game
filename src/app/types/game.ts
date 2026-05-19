@@ -40,4 +40,6 @@ export type GameAction =
     }
   | { type: "SET_TOPIC"; payload: string }
   | { type: "SET_HINT"; payload: string }
-  | { type: "SET_ANSWER"; payload: string };
+  | { type: "SET_ANSWER"; payload: string }
+  | { type: "ANSWER_CORRECT" }
+  | { type: "ANSWER_INCORRECT" };
