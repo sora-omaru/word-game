@@ -28,7 +28,6 @@ export function PlayerSetup({ dispatch }: Props) {
   };
 
   const handleChangePlayerName = (index: number, value: string) => {
-    console.log("start")
     const nextPlayerNames = playerNames.map((name, currentIndex) =>
       currentIndex === index ? value : name,
     );
@@ -51,7 +50,6 @@ export function PlayerSetup({ dispatch }: Props) {
         topic: randomTopic,
       },
     });
-    console.log("お題",randomTopic)
   };
 
   return (

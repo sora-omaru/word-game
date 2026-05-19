@@ -3,12 +3,14 @@
 import { useReducer } from "react";
 import { gameReducer, initialGameState } from "./reducers/gameReducer";
 import { PlayerSetup } from "@/components/PlayerSetup";
+import { TopicScreen } from "@/components/TopicScreen";
 
 export default function Home() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
 
   return (
     <main>
+      {/* メインの画面 */}
       {state.screen === "TITLE" && (
         <div>
           <h1>ワードゲーム</h1>
@@ -17,15 +19,12 @@ export default function Home() {
           </button>
         </div>
       )}
-
-      {state.screen === "PLAYER_SETUP" && (
-        <div>
-          <h2>プレイヤー設定</h2>
-          <button onClick={() => dispatch({ type: "GO_TOPIC" })}>次へ</button>
-        </div>
-      )}
-
+      {/* プレイヤー情報 */}
       {state.screen === "PLAYER_SETUP" && <PlayerSetup dispatch={dispatch} />}
+      {/* お題画面 */}
+      {state.screen === "TOPIC" && (
+        <TopicScreen state={state} dispatch={dispatch} />
+      )}
     </main>
   );
 }
