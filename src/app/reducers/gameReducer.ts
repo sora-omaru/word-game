@@ -70,6 +70,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         screen: "ANSWER_INPUT",
       };
       
+      case "SET_ANSWER":
+        return{
+          ...state,
+          answer: action.payload,
+          screen:"RESULT"
+        }
 
     default:
       return state;
