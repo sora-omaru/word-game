@@ -57,12 +57,19 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         topic: action.payload.topic,
         screen: "TOPIC",
       };
-    case "SET_TOPIC"://再抽選などを作るのであれば必要かも？
+    case "SET_TOPIC": //再抽選などを作るのであれば必要かも？
       return {
         ...state,
         topic: action.payload,
         screen: "TOPIC",
       };
+    case "SET_HINT":
+      return {
+        ...state,
+        hint: action.payload,
+        screen: "ANSWER_INPUT",
+      };
+      
 
     default:
       return state;

@@ -4,6 +4,7 @@ import { useReducer } from "react";
 import { gameReducer, initialGameState } from "./reducers/gameReducer";
 import { PlayerSetup } from "@/components/PlayerSetup";
 import { TopicScreen } from "@/components/TopicScreen";
+import { HintInputScreen } from "@/components/HintInputScreem";
 
 export default function Home() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
@@ -24,6 +25,10 @@ export default function Home() {
       {/* お題画面 */}
       {state.screen === "TOPIC" && (
         <TopicScreen state={state} dispatch={dispatch} />
+      )}
+      {/* ヒント画面 */}
+      {state.screen === "HINT_INPUT" && (
+        <HintInputScreen state={state} dispatch={dispatch} />
       )}
     </main>
   );

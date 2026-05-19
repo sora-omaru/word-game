@@ -38,4 +38,6 @@ export type GameAction =
         topic: string;
       };
     }
-  | { type: "SET_TOPIC"; payload: string };
+  | { type: "SET_TOPIC"; payload: string }
+  | { type: "SET_HINT"; payload: string }
+  | { type: "SET_ANSWER"; payload: string };
