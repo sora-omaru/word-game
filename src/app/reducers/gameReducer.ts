@@ -106,5 +106,23 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     default:
       return state;
+
+   case 'NEXT_TURN': {
+  const nextCurrentPlayerIndex =
+    (state.currentPlayerIndex + 1) % state.players.length;
+
+  const nextAnswerPlayerIndex =
+    (nextCurrentPlayerIndex + 1) % state.players.length;
+
+  return {
+    ...state,
+    currentPlayerIndex: nextCurrentPlayerIndex,
+    answerPlayerIndex: nextAnswerPlayerIndex,
+    topic: action.payload.topic,
+    hint: '',
+    answer: '',
+    screen: 'TOPIC',
+  };
+}
   }
 }
