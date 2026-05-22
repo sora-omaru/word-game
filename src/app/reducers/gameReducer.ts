@@ -104,25 +104,30 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...state,
       };
 
+    case "FINISH_GAME":
+      return {
+        ...state,
+        screen: "FINAL_RESULT",
+      };
     default:
       return state;
 
-   case 'NEXT_TURN': {
-  const nextCurrentPlayerIndex =
-    (state.currentPlayerIndex + 1) % state.players.length;
+    case "NEXT_TURN": {
+      const nextCurrentPlayerIndex =
+        (state.currentPlayerIndex + 1) % state.players.length;
 
-  const nextAnswerPlayerIndex =
-    (nextCurrentPlayerIndex + 1) % state.players.length;
+      const nextAnswerPlayerIndex =
+        (nextCurrentPlayerIndex + 1) % state.players.length;
 
-  return {
-    ...state,
-    currentPlayerIndex: nextCurrentPlayerIndex,
-    answerPlayerIndex: nextAnswerPlayerIndex,
-    topic: action.payload.topic,
-    hint: '',
-    answer: '',
-    screen: 'TOPIC',
-  };
-}
+      return {
+        ...state,
+        currentPlayerIndex: nextCurrentPlayerIndex,
+        answerPlayerIndex: nextAnswerPlayerIndex,
+        topic: action.payload.topic,
+        hint: "",
+        answer: "",
+        screen: "TOPIC",
+      };
+    }
   }
 }

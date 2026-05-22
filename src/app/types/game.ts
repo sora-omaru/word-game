@@ -4,7 +4,8 @@ export type Screen =
   | "TOPIC"
   | "HINT_INPUT"
   | "ANSWER_INPUT"
-  | "RESULT";
+  | "RESULT"
+  | "FINAL_RESULT";
 
 export type Player = {
   id: number;
@@ -44,8 +45,11 @@ export type GameAction =
   | { type: "ANSWER_CORRECT" }
   | { type: "ANSWER_INCORRECT" }
   | {
-      type: 'NEXT_TURN';
+      type: "NEXT_TURN";
       payload: {
-          topic: string;
+        topic: string;
       };
+    }
+  |{
+    type:"FINISH_GAME"
   }
