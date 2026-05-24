@@ -7,6 +7,7 @@ import { TopicScreen } from "@/components/TopicScreen";
 import { HintInputScreen } from "@/components/HintInputScreem";
 import { AnswerInputScreen } from "@/components/AnswerInputScreen";
 import { ResultScreen } from "@/components/ResultScreen";
+import { FinalResultScreen } from "@/components/FinalResultScreen";
 
 export default function Home() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
@@ -40,6 +41,12 @@ export default function Home() {
       {state.screen === "RESULT" && (
         <ResultScreen state={state} dispatch={dispatch} />
       )}
+      {/* 結果画面 */}
+      {state.screen === "FINAL_RESULT" && (
+        <FinalResultScreen state={state} dispatch={dispatch} />
+      )}
+
+      
     </main>
   );
 }
