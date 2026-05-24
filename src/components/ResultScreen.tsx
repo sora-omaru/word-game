@@ -11,15 +11,12 @@ export function ResultScreen({ state, dispatch }: Props) {
 
   const answerPlayer = state.players[state.answerPlayerIndex];
 
-  const handleNextTurn = () => {
+  const createNextTopicPayload = () => {
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
 
-    dispatch({
-      type: "NEXT_TURN",
-      payload: {
-        topic: randomTopic,
-      },
-    });
+    return {
+      topic: randomTopic,
+    };
   };
 
   return (
@@ -40,6 +37,7 @@ export function ResultScreen({ state, dispatch }: Props) {
         onClick={() =>
           dispatch({
             type: "ANSWER_CORRECT",
+            payload: createNextTopicPayload(),
           })
         }
       >
@@ -50,13 +48,12 @@ export function ResultScreen({ state, dispatch }: Props) {
         onClick={() =>
           dispatch({
             type: "ANSWER_INCORRECT",
+            payload: createNextTopicPayload(),
           })
         }
       >
         不正解
       </button>
-
-      <button onClick={handleNextTurn}>次の問題へ</button>
 
       <button onClick={() => dispatch({ type: "FINISH_GAME" })}>
         ゲーム終了

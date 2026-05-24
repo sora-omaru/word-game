@@ -42,14 +42,18 @@ export type GameAction =
   | { type: "SET_TOPIC"; payload: string }
   | { type: "SET_HINT"; payload: string }
   | { type: "SET_ANSWER"; payload: string }
-  | { type: "ANSWER_CORRECT" }
-  | { type: "ANSWER_INCORRECT" }
   | {
-      type: "NEXT_TURN";
+      type: "ANSWER_CORRECT";
       payload: {
         topic: string;
       };
     }
-  |{
-    type:"FINISH_GAME"
-  }
+  | {
+      type: "ANSWER_INCORRECT";
+      payload: {
+        topic: string;
+      };
+    }
+  | {
+      type: "FINISH_GAME";
+    };

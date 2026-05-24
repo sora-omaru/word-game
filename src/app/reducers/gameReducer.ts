@@ -14,6 +14,23 @@ export const initialGameState: GameState = {
   answer: "",
 };
 
+function getNextTurnState(state: GameState, topic: string) {
+  const nextCurrentPlayerIndex =
+    (state.currentPlayerIndex + 1) % state.players.length;
+
+  const nextAnswerPlayerIndex =
+    (nextCurrentPlayerIndex + 1) % state.players.length;
+
+  return {
+    currentPlayerIndex: nextCurrentPlayerIndex,
+    answerPlayerIndex: nextAnswerPlayerIndex,
+    topic,
+    hint: "",
+    answer: "",
+    screen: "TOPIC" as const,
+  };
+}
+
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "GO_PLAYER_SETUP":
@@ -77,7 +94,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         screen: "RESULT",
       };
 
-    case "ANSWER_CORRECT": //正解者に2点、出題者に1点。そのほかのプレイヤーは1点
+    case "ANSWER_CORRECT": //正解者に2点、出題者に1点。
       return {
         ...state,
         players: state.players.map((player, index) => {
@@ -97,11 +114,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
           return player;
         }),
+        ...getNextTurnState(state, action.payload.topic),
       };
 
     case "ANSWER_INCORRECT":
       return {
         ...state,
+        ...getNextTurnState(state, action.payload.topic),
       };
 
     case "FINISH_GAME":
@@ -111,23 +130,5 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     default:
       return state;
-
-    case "NEXT_TURN": {
-      const nextCurrentPlayerIndex =
-        (state.currentPlayerIndex + 1) % state.players.length;
-
-      const nextAnswerPlayerIndex =
-        (nextCurrentPlayerIndex + 1) % state.players.length;
-
-      return {
-        ...state,
-        currentPlayerIndex: nextCurrentPlayerIndex,
-        answerPlayerIndex: nextAnswerPlayerIndex,
-        topic: action.payload.topic,
-        hint: "",
-        answer: "",
-        screen: "TOPIC",
-      };
-    }
   }
 }
