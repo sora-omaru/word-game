@@ -1,4 +1,4 @@
-"use Client";
+"use client";
 
 import { GameAction, Player } from "@/app/types/game";
 import { useState } from "react";
@@ -53,11 +53,12 @@ export function PlayerSetup({ dispatch }: Props) {
   };
 
   return (
-    <section>
+    <section className="game-panel setup-screen">
+      <p className="eyebrow">Entry</p>
       <h2>プレイヤー設定</h2>
 
-      <label>
-        人数:
+      <label className="form-control">
+        <span>人数</span>
         <select value={playerCount} onChange={handleChangePlayerCount}>
           <option value={2}>2人</option>
           <option value={3}>3人</option>
@@ -65,10 +66,10 @@ export function PlayerSetup({ dispatch }: Props) {
         </select>
       </label>
 
-      {playerNames.map((name, index) => (
-        <div key={index}>
-          <label>
-            プレイヤー{index + 1}:
+      <div className="player-list">
+        {playerNames.map((name, index) => (
+          <label className="form-control player-field" key={index}>
+            <span>プレイヤー{index + 1}</span>
             <input
               type="text"
               value={name}
@@ -77,9 +78,12 @@ export function PlayerSetup({ dispatch }: Props) {
               }
             />
           </label>
-        </div>
-      ))}
-      <button onClick={handleStartGame}>ゲーム開始</button>
+        ))}
+      </div>
+
+      <button className="game-button primary-button" onClick={handleStartGame}>
+        ゲーム開始
+      </button>
     </section>
   );
 }

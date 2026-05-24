@@ -20,42 +20,63 @@ export function ResultScreen({ state, dispatch }: Props) {
   };
 
   return (
-    <section>
+    <section className="game-panel result-screen">
+      <p className="eyebrow">Judge</p>
       <h2>結果画面</h2>
 
-      <p>出題者：{currentPlayer.name}</p>
+      <dl className="result-grid">
+        <div>
+          <dt>出題者</dt>
+          <dd>{currentPlayer.name}</dd>
+        </div>
+        <div>
+          <dt>回答者</dt>
+          <dd>{answerPlayer.name}</dd>
+        </div>
+        <div>
+          <dt>お題</dt>
+          <dd>{state.topic}</dd>
+        </div>
+        <div>
+          <dt>ヒント</dt>
+          <dd>{state.hint}</dd>
+        </div>
+        <div className="wide-result">
+          <dt>回答</dt>
+          <dd>{state.answer}</dd>
+        </div>
+      </dl>
 
-      <p>回答者：{answerPlayer.name}</p>
+      <div className="button-row">
+        <button
+          className="game-button correct-button"
+          onClick={() =>
+            dispatch({
+              type: "ANSWER_CORRECT",
+              payload: createNextTopicPayload(),
+            })
+          }
+        >
+          正解
+        </button>
 
-      <p>お題：{state.topic}</p>
-
-      <p>ヒント：{state.hint}</p>
-
-      <p>回答：{state.answer}</p>
+        <button
+          className="game-button incorrect-button"
+          onClick={() =>
+            dispatch({
+              type: "ANSWER_INCORRECT",
+              payload: createNextTopicPayload(),
+            })
+          }
+        >
+          不正解
+        </button>
+      </div>
 
       <button
-        onClick={() =>
-          dispatch({
-            type: "ANSWER_CORRECT",
-            payload: createNextTopicPayload(),
-          })
-        }
+        className="game-button secondary-button"
+        onClick={() => dispatch({ type: "FINISH_GAME" })}
       >
-        正解
-      </button>
-
-      <button
-        onClick={() =>
-          dispatch({
-            type: "ANSWER_INCORRECT",
-            payload: createNextTopicPayload(),
-          })
-        }
-      >
-        不正解
-      </button>
-
-      <button onClick={() => dispatch({ type: "FINISH_GAME" })}>
         ゲーム終了
       </button>
     </section>

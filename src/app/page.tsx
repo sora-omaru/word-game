@@ -13,15 +13,22 @@ export default function Home() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
 
   return (
-    <main>
+    <main className="game-shell">
       {/* メインの画面 */}
       {state.screen === "TITLE" && (
-        <div>
-          <h1>ワードゲーム</h1>
-          <button onClick={() => dispatch({ type: "GO_PLAYER_SETUP" })}>
+        <section className="game-panel title-screen">
+          <p className="eyebrow">5文字ヒントで当てろ</p>
+          <h1 className="game-title">ワードゲーム</h1>
+          <p className="lead-text">
+            出題者のヒントを頼りに、回答者が言葉を推理する対戦ゲームです。
+          </p>
+          <button
+            className="game-button primary-button"
+            onClick={() => dispatch({ type: "GO_PLAYER_SETUP" })}
+          >
             スタート
           </button>
-        </div>
+        </section>
       )}
       {/* プレイヤー情報 */}
       {state.screen === "PLAYER_SETUP" && <PlayerSetup dispatch={dispatch} />}
@@ -46,7 +53,6 @@ export default function Home() {
         <FinalResultScreen state={state} dispatch={dispatch} />
       )}
 
-      
     </main>
   );
 }

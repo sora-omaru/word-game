@@ -117,7 +117,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...getNextTurnState(state, action.payload.topic),
       };
 
-    case "ANSWER_INCORRECT":
+    case "ANSWER_INCORRECT"://不正解はそのまま
       return {
         ...state,
         ...getNextTurnState(state, action.payload.topic),

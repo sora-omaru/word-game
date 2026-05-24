@@ -11,16 +11,22 @@ export function FinalResultScreen({ state, dispatch }: Props) {
   );
 
   return (
-    <section>
+    <section className="game-panel final-screen">
+      <p className="eyebrow">Ranking</p>
       <h2>最終結果</h2>
-      <ol>
-        {sortedPlayers.map((player,index)=>(
+      <ol className="leaderboard">
+        {sortedPlayers.map((player, index) => (
           <li key={index}>
-            {index+1}:{player.name}さん／{player.score}点
+            <span className="rank-number">{index + 1}</span>
+            <span>{player.name}さん</span>
+            <strong>{player.score}点</strong>
           </li>
         ))}
       </ol>
-      <button onClick={() => dispatch({ type: "GO_TITLE" })}>
+      <button
+        className="game-button primary-button"
+        onClick={() => dispatch({ type: "GO_TITLE" })}
+      >
         タイトルへ戻る
       </button>
     </section>
